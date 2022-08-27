@@ -11,12 +11,37 @@
     <title>Forums</title>
 </head>
 <body>
-
     {% include 'navbar.html' %}
-
     <div class="container">
         {% block content %}
             <h1>Forum</h1>
+            <a href="{% url 'create_post' %}" class="btn btn-primary">Create New Post</a>
+            <table class="table">
+                <thead>
+                  <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Created at</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if object_list %}
+                        {% for post in object_list %}
+                        <tr>
+                            <td><a href="{% url 'detail_post' post.pk %}">{{ post.title }}</a></td>
+                            <td>{{ post.description }}</td>
+                            <th scope="row">{{ post.created_at }}</th>
+                            <td><a href="{% url 'update_post' post.pk %}" class="btn btn-primary">Edit</a></td>
+                            <td><a href="{% url 'delete_post' post.pk %}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <p>No posts</p>
+                    {% endif %}
+                </tbody>
+              </table>
         {% endblock %}
     </div>
 </body>
