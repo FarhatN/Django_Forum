@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .forms import PostForm, CommentForm, UserRegisterForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 def index(req):
     return render(req, 'index.html')
@@ -32,12 +32,14 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     template_name = 'create_post.html'
     form_class = PostForm
 
-class UpdatePostView(LoginRequiredMixin, UpdateView):
+class UpdatePostView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'service.change_post'
     model = Post
     template_name = 'create_post.html'
     form_class = PostForm
 
-class DeletePostView(LoginRequiredMixin, DeleteView):
+class DeletePostView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'service.delete_post'
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('index')
