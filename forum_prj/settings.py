@@ -122,3 +122,9 @@ LOGOUT_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_HOST = 'sntp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'test@gmail.com'
+EMAIL_HOST_PASSWORD = '1'
+EMAIL_USE_TLS = True

@@ -1,8 +1,9 @@
 from django.forms import ModelForm, fields, widgets
-from .models import Post, Comment
+from .models import Post, Comment, Message
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
 
 class PostForm(ModelForm):
     class Meta:
@@ -13,6 +14,7 @@ class PostForm(ModelForm):
             'description': forms.Textarea(attrs={'class':'form-control'}),
         }
 
+
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
@@ -20,6 +22,16 @@ class CommentForm(ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'class':'form-control'}),
         }
+
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ['title', 'body']
+        widgets = {
+            'description': forms.Textarea(attrs={'class':'form-control'}),
+        }
+
 
 class UserRegisterForm(UserCreationForm):
     class Meta:
